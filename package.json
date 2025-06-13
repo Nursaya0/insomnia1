@@ -4,8 +4,11 @@
   "description": "Тест API PartnerPay через OTP",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:balance": "jest _tests_/balance.test.js --runInBand"
+ 
   },
+  
   "devDependencies": {
     "axios": "^1.9.0",
     "dotenv": "^16.5.0",
