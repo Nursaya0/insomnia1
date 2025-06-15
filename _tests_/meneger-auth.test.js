@@ -18,7 +18,7 @@ describe('Manager Authorization', () => {
       payload,
       { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
     );
-
+    console.log(response.status)
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty('access_token');
     expect(typeof response.data.access_token).toBe('string');
