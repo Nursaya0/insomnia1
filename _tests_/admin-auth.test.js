@@ -2,7 +2,7 @@
 jest.setTimeout(10_000);
 require("dotenv").config();
 
-const { getAdminTokenByOtp } = require("../api/AdminClient");
+const { getAdminTokenByOtp } = require("../api/AdminToken");
 
 describe("Admin Authorization via OTP", () => {
   let tokens;

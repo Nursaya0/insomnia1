@@ -2,7 +2,7 @@
 
 require("dotenv").config();
 const axios = require("axios");
-const { getAdminTokenByOtp } = require("../api/AdminClient");
+const { getAdminTokenByOtp } = require("../api/AdminToken");
 
 describe("Activate Employee as Admin", () => {
   let accessToken;
@@ -48,7 +48,7 @@ describe("Activate Employee as Admin", () => {
 //employee-fire
 // require("dotenv").config();
 // const axios = require("axios");
-// const { getAdminTokenByOtp } = require("../api/AdminClient");
+// const { getAdminTokenByOtp } = require("../api/AdminToken");
 
 // describe("Fire Employee as Admin", () => {
 //   let accessToken;
