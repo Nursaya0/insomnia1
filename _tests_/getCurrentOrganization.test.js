@@ -1,4 +1,4 @@
-// _tests_/getCurrentOrganization.test.js
+// organizatoin/Get current organization (Manager)
 require("dotenv").config();
 const axios = require("axios");
 const { getManagerTokenByOtp } = require("../api/ManagerToken");
