@@ -1,7 +1,7 @@
-// _tests_/updateManagerByAdmin.test.js
+
 require("dotenv").config();
 const axios = require("axios");
-const { getAdminTokenByOtp } = require("../api/AdminToken");
+const { getAdminTokenByOtp } = require("../../api/AdminToken");
 
 describe("✏️ Обновление менеджера (ID = 14) через администратора", () => {
   let token;

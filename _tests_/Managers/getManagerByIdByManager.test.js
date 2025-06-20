@@ -1,7 +1,7 @@
 
 require("dotenv").config();
 const axios = require("axios");
-const { getManagerTokenByOtp } = require("../api/ManagerToken");
+const { getManagerTokenByOtp } = require("../../api/ManagerToken");
 
 describe("📋 Получение менеджера по ID под токеном менеджера", () => {
   let token;

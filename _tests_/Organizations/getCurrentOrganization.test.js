@@ -1,7 +1,7 @@
 // organizatoin/Get current organization (Manager)
 require("dotenv").config();
 const axios = require("axios");
-const { getManagerTokenByOtp } = require("../api/ManagerToken");
+const { getManagerTokenByOtp } = require("../../api/ManagerToken");
 
 describe("🏢 Получение информации об организации (currentOrganization)", () => {
   let token;

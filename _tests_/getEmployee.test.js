@@ -1,6 +1,5 @@
 const axios = require("axios");
 
-// URL вашего GraphQL API (например, локальный сервер)
 const API_URL = "https://api.dev.partnerspay.co/public/graphql";
 
 describe("GraphQL Mutation: updateEmployee", () => {
@@ -33,8 +32,6 @@ describe("GraphQL Mutation: updateEmployee", () => {
     expect(response.status).toBe(200);
     // expect(response.data.data.updateEmployee.employeeId).toBe("");
 
-    // Здесь можно добавить проверку в базу данных, если нужно
-    // Например, запрос к API или проверку через ORM
   });
 
   it("should return an error if employee does not exist", async () => {
@@ -61,8 +58,8 @@ describe("GraphQL Mutation: updateEmployee", () => {
       headers: { "Content-Type": "application/json" }
     });
 
-    expect(response.status).toBe(200); // GraphQL всегда возвращает 200, даже при ошибках
+    expect(response.status).toBe(200); 
     expect(response.data.errors).toBeDefined();
-    // expect(response.data.errors[0].message).toMatch(/not found/i); // Уточните текст ошибки
+    
   });
 }); 

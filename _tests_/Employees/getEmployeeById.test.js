@@ -2,7 +2,7 @@
 
 
 
-// /getEmployeeData.test.js
+
 require('dotenv').config();
 const axios = require('axios');
 const { inspect } = require('util');
@@ -77,8 +77,8 @@ describe('Employee Data Output', () => {
           headers: {
             'Authorization': `Bearer ${tokenResponse.data.access_token}`,
             'Content-Type': 'application/json',
-            'X-Org-id': process.env.ORG_ID,     // Новый заголовок
-            'X-Member-id': process.env.MEMBER_ID // Новый заголовок
+            'X-Org-id': process.env.ORG_ID,     
+            'X-Member-id': process.env.MEMBER_ID 
           }
         }
       );

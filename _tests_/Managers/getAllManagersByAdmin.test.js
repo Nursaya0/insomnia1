@@ -1,7 +1,7 @@
-// _tests_/getManagersByOrg.test.js
+
 require("dotenv").config();
 const axios = require("axios");
-const { getAdminTokenByOtp } = require("../api/AdminToken");
+const { getAdminTokenByOtp } = require("../../api/AdminToken");
 
 describe("👔 Менеджеры по TARGET_ORG_ID из .env – красивый вывод", () => {
   let token;

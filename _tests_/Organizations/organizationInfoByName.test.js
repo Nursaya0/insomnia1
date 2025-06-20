@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { getAdminTokenByOtp } = require("../api/AdminToken");
+const { getAdminTokenByOtp } = require("../../api/AdminToken");
 require("dotenv").config();
 
 describe("🔁 Получение ID организации по имени и подробной информации", () => {

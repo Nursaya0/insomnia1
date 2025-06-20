@@ -1,7 +1,7 @@
 // _tests_/getMemberBalance.test.js
 require("dotenv").config();
 const axios = require("axios");
-const { getManagerTokenByOtp } = require("../api/ManagerToken");
+const { getManagerTokenByOtp } = require("../../api/ManagerToken");
 
 describe("💰 Получение баланса организации по MEMBER_ID", () => {
   let token;

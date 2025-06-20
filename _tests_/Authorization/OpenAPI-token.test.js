@@ -1,4 +1,4 @@
-// в начале файла
+
 require('dotenv').config();
 
 const axios = require('axios');

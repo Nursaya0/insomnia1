@@ -1,7 +1,7 @@
 // _tests_/getTransitAccountBalance.test.js
 require("dotenv").config();
 const axios = require("axios");
-const { getAdminTokenByOtp } = require("../api/AdminToken");
+const { getAdminTokenByOtp } = require("../../api/AdminToken");
 
 describe("💳 Получение баланса транзитного счёта", () => {
   let token;
