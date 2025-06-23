@@ -24,7 +24,7 @@ describe('👤 Создание сессии сотрудника', () => {
       expect(res.data).toHaveProperty('access_token');
 
       accessToken = res.data.access_token;
-      console.log('✅ Токен получен');
+      // console.log('✅ Токен получен');
     } catch (err) {
       console.error('❌ Ошибка при получении токена:', err.response?.data || err.message);
       throw err;
