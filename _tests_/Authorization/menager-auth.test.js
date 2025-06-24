@@ -1,5 +1,3 @@
-// _tests/manager-auth.test.js
-
 require('dotenv').config();
 const axios = require('axios');
 const qs    = require('qs');

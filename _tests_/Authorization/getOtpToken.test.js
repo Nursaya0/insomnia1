@@ -7,9 +7,9 @@ describe("📱 Получение токена по OTP-коду", () => {
   it("должен вернуть access_token", async () => {
     const data = qs.stringify({
       grant_type: "password",
-      phone_number: "77474818132",        
+      phone_number: "77071200998",        
       client_id: "mobile-frontend",
-      code: "8132"                       
+      code: "0998"                       
     });
 
     const response = await axios.post(

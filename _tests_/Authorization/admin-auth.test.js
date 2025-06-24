@@ -1,4 +1,3 @@
-// _tests_/admin-auth.test.js
 jest.setTimeout(10_000);
 require("dotenv").config();
 

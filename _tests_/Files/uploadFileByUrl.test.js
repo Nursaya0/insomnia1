@@ -60,15 +60,15 @@ describe('📦 Получение fileId и загрузка фото в MinIO',
     console.log('🏢 ORG_ID:', process.env.ORG_ID);
     console.log('👤 MEMBER_ID:', process.env.MEMBER_ID);
 
-    // 🔧 Используем MinIO базовый URL из .env
+    // ✅ Собираем полный URL через MINIO_URL из .env
     const fullUrl = `${process.env.MINIO_URL}${url}`;
+    console.log('🌍 полный URL для загрузки:', fullUrl);
 
-    console.log('🌍 полный URL для загрузки в MinIO:', fullUrl);
-
-    // Загрузка файла
-    const filePath = path.join(__dirname, '../../assets/dog.jpg');
+    // 📥 Путь к файлу
+    const filePath = path.join(__dirname, '../assets/dog.jpg');
     const fileBuffer = fs.readFileSync(filePath);
 
+    // 🛫 Загрузка файла в MinIO
     const uploadRes = await axios.put(fullUrl, fileBuffer, {
       headers: {
         'Content-Type': 'image/jpeg',
