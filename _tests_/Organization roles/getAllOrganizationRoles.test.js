@@ -32,7 +32,6 @@ describe("🧾 Получение ролей организации", () => {
     const query = `
       query {
         organizationRoles(
-          search: "админ"
           page: 0
           size: 10
         ) {

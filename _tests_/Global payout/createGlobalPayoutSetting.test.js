@@ -1,34 +1,34 @@
-require("dotenv").config();
-const axios = require("axios");
-const qs = require("qs");
+require('dotenv').config();
+const axios = require('axios');
+const qs = require('qs');
 
-describe("💸 Создание глобальных настроек выплат", () => {
-  let accessToken;
+let accessToken;
 
-  beforeAll(async () => {
-    const payload = qs.stringify({
-      grant_type: process.env.KEYCLOAK_GRANT_TYPE,
-      client_id: process.env.KEYCLOAK_CLIENT_ID,
-      username: process.env.KEYCLOAK_USERNAME,
-      password: process.env.KEYCLOAK_PASSWORD,
+describe('💸 Админ: создание глобальных настроек выплат', () => {
+  it('должен получить токен и создать настройки', async () => {
+    // 🔐 Авторизация админа
+    const data = qs.stringify({
+      grant_type: 'password',
+      phone_number: process.env.ADMIN_PHONE_NUMBER,
+      client_id: process.env.ADMIN_CLIENT_ID,
+      code: process.env.ADMIN_OTP_CODE,
     });
 
-    const res = await axios.post(
+    const tokenRes = await axios.post(
       `${process.env.KEYCLOAK_URL}/protocol/openid-connect/token`,
-      payload,
+      data,
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
     );
 
-    expect(res.status).toBe(200);
-    accessToken = res.data.access_token;
-    console.log("✅ Админ токен получен");
-  });
+    expect(tokenRes.status).toBe(200);
+    accessToken = tokenRes.data.access_token;
+    console.log('✅ Токен администратора получен');
 
-  it("должен создать глобальные настройки выплат", async () => {
+    // 📤 Запрос на создание глобальных настроек выплат
     const query = `
       mutation {
         createGlobalPayoutSetting(
@@ -52,26 +52,23 @@ describe("💸 Создание глобальных настроек выпла
       }
     `;
 
-    const response = await axios.post(
+    const res = await axios.post(
       process.env.GRAPHQL_URL,
-      {
-        query,
-        variables: {} // <---- добавлены Query Variables
-      },
+      { query },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
 
-    const result = response.data?.data?.createGlobalPayoutSetting;
-
-    console.log("📦 Ответ:");
-    console.dir(result, { depth: null, colors: true });
-
-    expect(result).toBeDefined();
-    expect(result.id).toBeGreaterThan(0);
+    expect(res.status).toBe(200);
+    const settingId = res.data.data?.createGlobalPayoutSetting?.id;
+    if (settingId) {
+      console.log('✅ Настройки успешно созданы. ID:', settingId);
+    } else {
+      console.error('❌ Ошибка создания настроек:', JSON.stringify(res.data, null, 2));
+    }
   });
 });

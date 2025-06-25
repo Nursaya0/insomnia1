@@ -1,34 +1,32 @@
-require("dotenv").config();
-const axios = require("axios");
-const qs = require("qs");
+require('dotenv').config();
+const axios = require('axios');
+const qs = require('qs');
 
-describe("💰 Получение активных глобальных настроек выплат", () => {
-  let accessToken;
+let accessToken;
 
-  beforeAll(async () => {
+describe('🔐 Авторизация администратора', () => {
+  it('должен получить access_token', async () => {
     const payload = qs.stringify({
-      grant_type: process.env.KEYCLOAK_GRANT_TYPE,
-      client_id: process.env.KEYCLOAK_CLIENT_ID,
-      username: process.env.KEYCLOAK_USERNAME,
-      password: process.env.KEYCLOAK_PASSWORD,
+      grant_type: 'password',
+      phone_number: process.env.ADMIN_PHONE_NUMBER,
+      client_id: process.env.ADMIN_CLIENT_ID,
+      code: process.env.ADMIN_OTP_CODE,
     });
 
     const res = await axios.post(
       `${process.env.KEYCLOAK_URL}/protocol/openid-connect/token`,
       payload,
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
+      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
     );
 
     expect(res.status).toBe(200);
     accessToken = res.data.access_token;
-    console.log("✅ Админ токен получен");
+    console.log('✅ Токен администратора получен');
   });
+});
 
-  it("должен получить активные глобальные настройки выплат", async () => {
+describe('🔎 Получение активных глобальных настроек выплат', () => {
+  it('должен вернуть текущие настройки', async () => {
     const query = `
       query {
         activeGlobalPayoutSetting {
@@ -50,26 +48,26 @@ describe("💰 Получение активных глобальных наст
       }
     `;
 
-    const response = await axios.post(
+    const res = await axios.post(
       process.env.GRAPHQL_URL,
-      {
-        query,
-        variables: {} // Query Variables
-      },
+      { query },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
 
-    const result = response.data?.data?.activeGlobalPayoutSetting;
+    expect(res.status).toBe(200);
+    const setting = res.data.data.activeGlobalPayoutSetting;
 
-    console.log("📦 Ответ:");
-    console.dir(result, { depth: null, colors: true });
+    expect(setting).toHaveProperty('id');
+    expect(setting).toHaveProperty('payout');
+    expect(setting).toHaveProperty('commission');
+    expect(setting).toHaveProperty('commissionThreshold');
+    expect(setting).toHaveProperty('status');
 
-    expect(result).toBeDefined();
-    expect(result.id).toBeGreaterThan(0);
+    console.log('✅ Текущие глобальные настройки:', JSON.stringify(setting, null, 2));
   });
 });
